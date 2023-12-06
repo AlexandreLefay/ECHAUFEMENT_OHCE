@@ -1,6 +1,7 @@
 package fr.epsi.c1;
 
 import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -21,7 +22,12 @@ public class Main {
     public static void greetUser(String str) {
         Date date = new Date();
         int hours = date.getHours();
+
+        Locale locale = Locale.getDefault();
         String greet = (hours < 12) ? "Bonjour" : "Bonsoir";
+        if (locale.getLanguage().equals("en")) {
+            greet = (hours < 12) ? "Good morning" : "Good evening";
+        }
         System.out.println(greet + ", Vous avez saisi : " + str);
     }
 

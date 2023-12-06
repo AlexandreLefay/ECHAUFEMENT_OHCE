@@ -7,10 +7,20 @@ import java.util.Scanner;
 public class Main {
     public static void main(String args[]) {
         System.out.println("Echauffement OHCE");
+
+        Locale locale = Locale.getDefault();
+        String lng = locale.getLanguage();
+
+        Date date = new Date();
+        int hours = date.getHours();
+
         String str = getInput();
-        greetUser(str);
-        checkPalindrome(str);
-        sayGoodbye();
+        StringBuffer reverse = (new StringBuffer(str)).reverse();
+
+
+        greetUser(str, hours, lng);
+        checkPalindrome(str, String.valueOf(reverse));
+        sayGoodbye(hours);
     }
 
     public static String getInput() {
@@ -19,20 +29,16 @@ public class Main {
         return sc.nextLine();
     }
 
-    public static void greetUser(String str) {
-        Date date = new Date();
-        int hours = date.getHours();
-
-        Locale locale = Locale.getDefault();
+    public static void greetUser(String str, int hours, String lng) {
         String greet = (hours < 12) ? "Bonjour" : "Bonsoir";
-        if (locale.getLanguage().equals("en")) {
+
+        if (lng.equals("en")) {
             greet = (hours < 12) ? "Good morning" : "Good evening";
         }
         System.out.println(greet + ", Vous avez saisi : " + str);
     }
 
-    public static void checkPalindrome(String str) {
-        StringBuffer reverse = (new StringBuffer(str)).reverse();
+    public static void checkPalindrome(String str, String reverse) {
         System.out.println("Miroir :" + reverse);
         Boolean isPalindrome = str.equals(reverse.toString());
         if (isPalindrome) {
@@ -42,11 +48,9 @@ public class Main {
         }
     }
 
-    public static void sayGoodbye() {
-        Date date = new Date();
-        int hours = date.getHours();
+    public static void sayGoodbye(int hours) {
 
-        if (hours < 12) {
+        if (hours < 17) {
             System.out.println("Au revoir !");
         } else {
             System.out.println("Bonne soirée !");
